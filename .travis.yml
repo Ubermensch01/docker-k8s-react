@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run ubermensch01/docker-k8s-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-k8s-react"
+  env: "DockerK8sReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-826507567886"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
